@@ -14,6 +14,7 @@ public class UserEntity {
   private String username;
   private String email;
   private String password;
+  private boolean googleAccount = false;
 
   // Constructors
   public UserEntity() {
@@ -40,6 +41,14 @@ public class UserEntity {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public boolean isGoogleAccount() {
+    return googleAccount;
+  }
+
+  public void setgoogleAccount(boolean googleAccount) {
+    this.googleAccount = googleAccount;
   }
 
   public String getEmail() {

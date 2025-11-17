@@ -10,23 +10,25 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-  private final String SECRET_KEY = "mySecretKeymySecretKeymySecretKey"; // 256-bit olmalı
+  private final String SECRET_KEY = "mySecretKeymySecretKeymySecretKey"; // 256-bit
   private final long EXPIRATION = 1000 * 60 * 60; // 1 saat
 
   private Key getSigningKey() {
     return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
   }
 
-  public String generateToken(String username) {
+  // JWT oluştururken artık email kullanıyoruz
+  public String generateToken(String email) {
     return Jwts.builder()
-        .setSubject(username)
+        .setSubject(email) // subject = email
         .setIssuedAt(new Date())
         .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
         .signWith(getSigningKey(), SignatureAlgorithm.HS256)
         .compact();
   }
 
-  public String extractUsername(String token) {
+  // Token’dan email’i al
+  public String extractEmail(String token) {
     return Jwts.parserBuilder()
         .setSigningKey(getSigningKey())
         .build()

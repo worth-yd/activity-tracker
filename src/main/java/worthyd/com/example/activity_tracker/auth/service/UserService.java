@@ -20,8 +20,8 @@ public class UserService implements UserDetailsService {
 
   // AuthenticationManager burada çağırır
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    UserEntity user = userRepository.findByUsername(username)
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    UserEntity user = userRepository.findByEmail(email)
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
     // UserEntity → UserDetails
